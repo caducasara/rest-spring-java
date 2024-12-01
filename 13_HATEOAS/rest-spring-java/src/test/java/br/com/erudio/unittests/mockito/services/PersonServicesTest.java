@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.model.Person;
 import br.com.erudio.repositories.PersonRepository;
 import br.com.erudio.services.PersonServices;
@@ -63,17 +64,61 @@ class PersonServicesTest {
 
 	@Test
 	void testCreatePerson() {
-		fail("Not yet implemented");
+		Person person = input.mockEntity(1);
+		Person persisted = person;
+		persisted.setId(1L);
+		
+		PersonVO vo = input.mockVO(1);
+		vo.setKey(1L);
+		
+		when(repository.save(person)).thenReturn(persisted);
+
+		var result = service.createPerson(vo);
+		
+		assertNotNull(result);
+		assertNotNull(result.getKey());
+		assertNotNull(result.getLinks());
+		assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+		assertEquals("Addres Test1", result.getAddress());
+		assertEquals("First Name Test1", result.getFirstName());
+		assertEquals("Last Name Test1", result.getLastName());
+		assertEquals("Female", result.getGender());
 	}
 
 	@Test
 	void testUpdatePerson() {
-		fail("Not yet implemented");
+		Person person = input.mockEntity(1);
+		person.setId(1L);
+		
+		Person persisted = person;
+		persisted.setId(1L);
+		
+		PersonVO vo = input.mockVO(1);
+		vo.setKey(1L);
+		
+		when(repository.findById(1L)).thenReturn(Optional.of(person));
+		when(repository.save(person)).thenReturn(persisted);
+
+		var result = service.updatePerson(vo);
+		
+		assertNotNull(result);
+		assertNotNull(result.getKey());
+		assertNotNull(result.getLinks());
+		assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+		assertEquals("Addres Test1", result.getAddress());
+		assertEquals("First Name Test1", result.getFirstName());
+		assertEquals("Last Name Test1", result.getLastName());
+		assertEquals("Female", result.getGender());
 	}
 
 	@Test
 	void testDeletePerson() {
-		fail("Not yet implemented");
+		Person person = input.mockEntity(1);
+		person.setId(1L);
+		
+		when(repository.findById(1L)).thenReturn(Optional.of(person));
+		
+		service.deletePerson(1L);
 	}
 
 }
