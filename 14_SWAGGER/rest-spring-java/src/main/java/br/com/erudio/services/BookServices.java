@@ -35,7 +35,7 @@ public class BookServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		BookVO vo =  BookMapper.parseObject(entity, BookVO.class);
-		vo.add(linkTo(methodOn(PersonController.class).getPersonById(id)).withSelfRel());
+		vo.add(linkTo(methodOn(BookController.class).getBookById(id)).withSelfRel());
 		
 		return vo;
 	}
