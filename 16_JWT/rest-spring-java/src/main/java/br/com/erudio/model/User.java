@@ -40,7 +40,7 @@ public class User implements UserDetails, Serializable{
 		private String password;
 		
 		@Column(name = "account_non_expired")
-		private Boolean accountNonExpied;
+		private Boolean accountNonExpired;
 		
 		@Column(name = "account_non_locked")
 		private Boolean accountNonLocked;
@@ -86,7 +86,7 @@ public class User implements UserDetails, Serializable{
 
 		@Override
 		public boolean isAccountNonExpired() {
-			return this.accountNonExpied;
+			return this.accountNonExpired;
 		}
 
 		@Override
@@ -128,12 +128,12 @@ public class User implements UserDetails, Serializable{
 			this.fullName = fullName;
 		}
 
-		public Boolean getAccountNonExpied() {
-			return accountNonExpied;
+		public Boolean getAccountNonExpired() {
+			return accountNonExpired;
 		}
 
-		public void setAccountNonExpied(Boolean accountNonExpied) {
-			this.accountNonExpied = accountNonExpied;
+		public void setAccountNonExpired(Boolean accountNonExpied) {
+			this.accountNonExpired = accountNonExpied;
 		}
 
 		public Boolean getAccountNonLocked() {
@@ -174,7 +174,7 @@ public class User implements UserDetails, Serializable{
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(accountNonExpied, accountNonLocked, credentialsNonExpired, enabled, fullName, id,
+			return Objects.hash(accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, fullName, id,
 					password, permissions, userName);
 		}
 
@@ -187,7 +187,7 @@ public class User implements UserDetails, Serializable{
 			if (getClass() != obj.getClass())
 				return false;
 			User other = (User) obj;
-			return Objects.equals(accountNonExpied, other.accountNonExpied)
+			return Objects.equals(accountNonExpired, other.accountNonExpired)
 					&& Objects.equals(accountNonLocked, other.accountNonLocked)
 					&& Objects.equals(credentialsNonExpired, other.credentialsNonExpired)
 					&& Objects.equals(enabled, other.enabled) && Objects.equals(fullName, other.fullName)

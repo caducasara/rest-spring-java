@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import br.com.erudio.security.jwt.JwtTokenFilter;
 import br.com.erudio.security.jwt.JwtTokenProvider;
@@ -64,10 +65,16 @@ public class SecurityConfig {
                     		"/swagger-ui/**",
                     		"/v3/api-docs/**"
                 		).permitAll()
-                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/**").authenticated()
                         .requestMatchers("/users").denyAll()
                 )
-                .cors(cors -> {})
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.addAllowedOrigin("*"); // Ou um domínio específico
+                    config.addAllowedMethod("*");
+                    config.addAllowedHeader("*");
+                    return config;
+                }))
                 .build();
     }
 }
