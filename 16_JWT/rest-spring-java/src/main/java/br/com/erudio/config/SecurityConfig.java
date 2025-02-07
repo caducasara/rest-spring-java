@@ -68,13 +68,7 @@ public class SecurityConfig {
                         .requestMatchers("/**").authenticated()
                         .requestMatchers("/users").denyAll()
                 )
-                .cors(cors -> cors.configurationSource(request -> {
-                    CorsConfiguration config = new CorsConfiguration();
-                    config.addAllowedOrigin("*"); // Ou um domínio específico
-                    config.addAllowedMethod("*");
-                    config.addAllowedHeader("*");
-                    return config;
-                }))
+                .cors(cors -> {})
                 .build();
     }
 }
