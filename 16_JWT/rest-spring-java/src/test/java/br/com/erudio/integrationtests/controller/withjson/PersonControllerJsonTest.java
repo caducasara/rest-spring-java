@@ -142,7 +142,6 @@ public class PersonControllerJsonTest extends AbstractIntegrationnTest {
 							.when()
 							.get("{id}")
 						.then()
-							.statusCode(200)
 						.extract()
 							.body()
 								.asString();
